@@ -61,6 +61,7 @@ blogRouter.post("/create",async (c)=>{
             data:{
                 title:body.title,
                 content:body.content,
+                date:new Date(),
                 authorId:userId
             }
         })
@@ -98,7 +99,19 @@ blogRouter.post("/create",async (c)=>{
   blogRouter.get("/bulk",async (c)=>{
     const prisma = c.get("prisma")
     try {
-        const blogs = await prisma.blog.findMany()
+        const blogs = await prisma.blog.findMany({
+          select:{
+            title:true,
+            id:true,
+            content:true,
+            date:true,
+            author:{
+              select:{
+                name:true
+              }
+            }
+          }
+        })
       return c.json({success:true,message:"blogs fetched",blogs:blogs})
     } catch (error) {
         return c.json({success:false,message:"blogs fetch failed"},400)
@@ -111,7 +124,18 @@ blogRouter.post("/create",async (c)=>{
 
     try {
         const blog = await prisma.blog.findUnique({
-            where:{id:id}
+            where:{id:id},
+            select:{
+              title:true,
+              id:true,
+              content:true,
+              date:true,
+              author:{
+                select:{
+                  name:true
+                }
+              }
+            }
         })
         if(!blog) return c.json({success:false,message:"blog not found"},400)
 

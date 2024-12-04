@@ -39,20 +39,20 @@ userRouter.post("/signup",async (c)=>{
       const isExist = await prisma.user.findUnique({
         where:{email:body.email}
       })
-      if(isExist) return c.json({success:false,message:"user already exist please signin"},403)
+      if(isExist) return c.json({success:false,message:"user already exist please signin"},400)
   
       try {
         const newUser = await prisma.user.create({
           data:{
             email:body.email,
             password:body.password,
-            name:body.name
+            name:body.name || "Anonymous"
           }
         })
         const token = await sign({id:newUser.id},c.env.JWT_SECRET)
-        return c .json({success:true,messege:"signup successful",token:token})
+        return c .json({success:true,message:"signup successful",token:token})
       } catch (error) {
-          return c.json({success:false,message:"error while creating user"},411)
+          return c.json({success:false,message:"error while creating user"},400)
       }
   })
   
@@ -69,18 +69,16 @@ userRouter.post("/signup",async (c)=>{
       const user = await prisma.user.findUnique({
         where:{
           email:body.email,
-          password:body.password
         }
       })
     
       if(!user){
-        c.status(403)
-        return c.json({success:false,message:"user not found"})
+        return c.json({success:false,message:"user not found"},400)
       }
       const token = await sign({id:user.id},c.env.JWT_SECRET)
     
-      return c.json({success:true,messega:"signin successful",token:token})
+      return c.json({success:true,message:"signin successful",token:token})
     } catch (error) {
-      return c.json({success:false,message:"error while signin"},403)
+      return c.json({success:false,message:"error while signin"},400)
     }
   })
