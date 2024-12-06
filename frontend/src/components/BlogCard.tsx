@@ -36,7 +36,7 @@ export const Avatar =({name,size="sm"}:{name:string,size?:"sm"|"md"|"lg"})=>{
     return <div className={clsx("relative inline-flex items-center justify-center",
     {"w-4 h-4":size==="sm","w-6 h-6":size==="md","w-8 h-8":size==="lg"},
     "overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600")}>
-        <span className={clsx("font-light  text-gray-600 dark:text-gray-300",{"text-xs":size==="sm","text-md":size==="md","text-lg":size==="lg"})}>{name[0].toUpperCase()}</span>
+        <span className={clsx("font-bold  text-gray-600 dark:text-gray-300",{"text-xs":size==="sm","text-md":size==="md","text-lg":size==="lg"})}>{name[0].toUpperCase()}</span>
     </div>
     
 }

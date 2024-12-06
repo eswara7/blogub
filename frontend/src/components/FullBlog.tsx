@@ -22,13 +22,17 @@ export const FullBlog = ({ blog }: { blog: blogsType }) => {
             <div>
               Author
               <div className="flex gap-1">
-                <div className="items-center"><Avatar name={blog.author.name || "Anonymous"} /></div>
-               <div> <div className="text-xl font-bold">
+                <div className="pt-px">
+                  <Avatar name={blog.author.name || "Anonymous"}/>
+                  </div>
+               <div className="items-center">
+                <div className="text-lg font-bold">
                   {blog.author.name || "Anonymous"}
                 </div>
                 <div className=" text-gray text-sm italic">
                   Turning thoughts into words, one story at a time
-                </div></div>
+                </div>
+                </div>
               </div>
             </div>
           </div>

@@ -119,7 +119,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden md:block">
         <Quote />
       </div>
     </div>

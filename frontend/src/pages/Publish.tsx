@@ -55,6 +55,8 @@ export const Publish = () => {
       if (response.data.success) {
         toast.success("blog published");
         navigate(`/blog/${response.data.id}`);
+        localStorage.removeItem("blogTitle")
+        localStorage.removeItem("blogContent")
       }
     } catch (error: any) {
       if (
