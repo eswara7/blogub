@@ -95,7 +95,7 @@ blogRouter.post("/create",async (c)=>{
    }
   })
   
-// Todo : add pagination here 
+// Todo : add pn here 
   blogRouter.get("/bulk",async (c)=>{
     const prisma = c.get("prisma")
     try {
